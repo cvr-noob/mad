@@ -44,6 +44,7 @@ android {
 dependencies {
     implementation(libs.androidx.lifecycle.viewmodel)
     implementation(libs.androidx.compose.runtime.livedata)
+    implementation("androidx.compose.runtime:runtime-livedata:1.9.4")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
