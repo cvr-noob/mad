@@ -4,25 +4,25 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class GameVM: ViewModel() {
-    private var words = listOf("apple", "banana", "cherry").shuffled()
-    private var currentIdx = 0
-    private var totalScore = 0
+    private var words = listOf("apple", "banana", "cherry")
+    private var _score: Int = 0
+    private var idx = 0
 
-    val scrambledWord = MutableLiveData(scramble(words[currentIdx]))
-    val score = MutableLiveData(totalScore)
+    var scrambled = MutableLiveData(scramble(words[idx]))
+    val score = MutableLiveData(_score)
 
     private fun scramble(word: String) = word.toList().shuffled().joinToString("")
 
-    fun checkGuess(guess: String) {
-        if (guess == words[currentIdx])
-            totalScore += 10
+    fun guess(word: String) {
+        if (word == words[idx]) {
+            _score += 10
+            score.value = _score
 
-        currentIdx++
-        if (currentIdx < words.size)
-            scrambledWord.value = scramble(words[currentIdx])
-        else
-            scrambledWord.value = "Game Over!"
-
-        score.value = totalScore
+            idx++
+            if (idx >= words.size)
+                scrambled.value = "Game Over!"
+            else
+                scrambled.value = scramble(words[idx])
+        }
     }
 }
