@@ -52,33 +52,19 @@ data class Affirmation(val imageRes: Int, val text: String)
 
 @Composable
 fun App(affirmations: List<Affirmation>) {
-    LazyColumn(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(12.dp)
-    ) {
+    LazyColumn {
         items(affirmations) { affirmation ->
             Card(
-                shape = RoundedCornerShape(16.dp),
-                modifier = Modifier.fillMaxWidth(),
-                elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
+                shape = RoundedCornerShape(25),
+                modifier = Modifier.fillMaxWidth().padding(10.dp)
             ) {
                 Row(
-                    modifier = Modifier.padding(16.dp),
-                    verticalAlignment = Alignment.CenterVertically
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically,
                 ) {
-                    Image(
-                        painter = painterResource(affirmation.imageRes),
-                        contentDescription = "Affirmation Image",
-                        contentScale = ContentScale.Crop,
-                        modifier = Modifier.size(80.dp).clip(RoundedCornerShape(8.dp))
-                    )
-                    Spacer(modifier = Modifier.width(16.dp))
-                    Text(
-                        text = affirmation.text,
-                        style = MaterialTheme.typography.bodyLarge
-                    )
+                    Image(painterResource(affirmation.imageRes), null)
+                    Spacer(Modifier.width(20.dp))
+                    Text(affirmation.text)
                 }
             }
         }
